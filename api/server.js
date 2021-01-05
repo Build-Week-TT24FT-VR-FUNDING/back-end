@@ -17,6 +17,6 @@ server.use("/projects", projectRouter);
 server.use("/user", userRouter);
 
 server.get("/", (_, res) => {
-  res.send({ message: "API UP" });
+  res.send({ message: "API up and running", env: `${process.env.DB_ENV}` });
 });
 module.exports = server;
