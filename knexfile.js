@@ -15,8 +15,9 @@ module.exports = {
   },
 
   production: {
-    ...sharedConfig,
-    connection: { filename: "./data/VRFund.db3" },
+    client: "pg",
+    connection: process.env.DATABASE_URL,
+    migrations: { directory: "./data/migrations" },
     seeds: { directory: "./data/seeds" },
   },
 };
