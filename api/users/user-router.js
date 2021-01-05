@@ -8,13 +8,11 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await Helper.findByID(id);
     const userProjects = await ProjectHelper.getByOwnerId(id);
-    res
-      .status(200)
-      .json({
-        username: user.username,
-        role: user.role,
-        projects: userProjects,
-      });
+    res.status(200).json({
+      email: user.email,
+      role: user.role,
+      projects: userProjects,
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
