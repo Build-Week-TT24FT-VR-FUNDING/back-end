@@ -20,7 +20,7 @@ router.post("/signup", validatePayload, validateUsernameUnique, (req, res) => {
       })
       .catch((error) => res.status(500).json({ message: error.message }));
   } else {
-    res.status(400).json({ message: "Invalid credentials, please try again." });
+    res.status(400).json({ message: "Missing Required Fields." });
   }
 });
 

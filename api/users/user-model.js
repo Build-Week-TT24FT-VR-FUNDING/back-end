@@ -7,6 +7,9 @@ module.exports = {
   findBy(email) {
     return db("users").where("email", email);
   },
+  findByID(id) {
+    return db("users").where("id", id);
+  },
 
   async create(user) {
     const [id] = await db("users").insert(user);

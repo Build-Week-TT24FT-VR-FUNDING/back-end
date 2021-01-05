@@ -26,7 +26,9 @@ router.get("/:id", validator, async (req, res) => {
 });
 
 router.post("/", validator, validateUserFundraiserRole, async (req, res) => {
-  const project = req.body;
+  const id = req.userID;
+  const project = { ...req.body, owner_id: id };
+  console.log(project);
   try {
     const newProjectPost = await Helper.create(project);
     res.status(201).json(newProjectPost);
