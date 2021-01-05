@@ -17,6 +17,6 @@ module.exports = {
 
   production: {
     ...sharedConfig,
-    connection: process.env.DATABASE_URL,
+    connection: { filename: "./data/VRFund.db3" },
   },
 };
