@@ -12,8 +12,8 @@ module.exports = {
   },
 
   async create(project) {
-    const [id] = await db("projects").insert(project);
-    return db("projects").where("project_id", id).first();
+    await db("projects").insert(project);
+    return db("projects");
   },
   async edit(id, changes) {
     await db("projects").where("project_id", id).update(changes);
