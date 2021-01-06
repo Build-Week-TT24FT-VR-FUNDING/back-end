@@ -35,6 +35,7 @@ const validator = (req, res, next) => {
         res.status(401).json("invalid token");
       } else {
         req.decodedToken = decoded;
+        req.userID = decoded.subject;
         next();
       }
     });
