@@ -37,12 +37,20 @@ router.post("/", validator, validateUserFundraiserRole, async (req, res) => {
   }
 });
 
-router.put("/:id", validator, async (req, res) => {
+router.put("/:id", validator, validateUserFundraiserRole, async (req, res) => {
   const { id } = req.params;
   const changes = req.body;
   try {
-    const updatedProject = await Helper.edit(id, changes);
-    res.status(201).json(updatedProject);
+    const userId = req.userID;
+    const [project] = await Helper.getById(id);
+    if (project.owner_id === userId) {
+      const updatedProject = await Helper.edit(id, changes);
+      res.status(201).json(updatedProject);
+    } else {
+      res
+        .status(400)
+        .json({ message: "You must be the owner to edit this project." });
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
