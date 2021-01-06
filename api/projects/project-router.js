@@ -25,15 +25,17 @@ router.get("/:id", validator, async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
   const id = req.userID;
   const project = { ...req.body, owner_id: id };
-  try {
-    await Helper.create(project);
-    res.status(201).json(project);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+
+  Helper.create(project)
+    .then((createdProject) => {
+      res.status(201).json(createdProject);
+    })
+    .catch((error) => {
+      res.status(500).json(error.message);
+    });
 });
 
 router.put("/:id", validator, validateUserFundraiserRole, async (req, res) => {
