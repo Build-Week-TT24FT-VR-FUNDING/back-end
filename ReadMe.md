@@ -146,7 +146,7 @@ Returns json data regarding all active projects.
 
 ---
 
-Returns json data regarding single project.
+Returns json data regarding a single project.
 
 - **URL**
 
@@ -339,3 +339,56 @@ Returns json data regarding all active projects.
     },
   });
   ```
+
+  ## **GET USER DATA**
+
+---
+
+Returns json data regarding a single user.
+
+- **URL**
+
+  https://vr-fund.herokuapp.com/user/:id
+
+- **Method:**
+
+  `GET`
+
+- **BODY Params**
+
+- **Success Response:**
+
+  - **Code:** 200 <br />
+    **Content:**
+
+    `{ user information, projects: [project information]}`
+
+- **Error Response:**
+
+  - **Code:** 500 SERVER ERROR <br />
+    **Content:** `{ message: error.message }`
+
+  OR
+
+  - **Code:** 401 UNAUTHORIZED <br />
+    **Content:** `{ error : "You must be logged (invalid token)." }`
+
+  OR
+
+  - **Code:** 204 NO DATA <br />
+    **Content:** `{ error : "We were unable to locate the requested user."}`
+
+- **Sample Call:**
+
+  ```javascript
+  $.ajax({
+    url: "/projects/:id",
+    dataType: "json",
+    type: "GET",
+    success: function (r) {
+      console.log(r);
+    },
+  });
+  ```
+
+}
