@@ -1,3 +1,6 @@
+var pg = require("pg");
+pg.defaults.ssl = true;
+
 const sharedConfig = {
   client: "sqlite3",
   useNullAsDefault: true,
