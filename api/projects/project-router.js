@@ -48,24 +48,39 @@ router.put("/:id", validator, validateUserFundraiserRole, async (req, res) => {
       const updatedProject = await Helper.edit(id, changes);
       res.status(201).json(updatedProject);
     } else {
-      res
-        .status(400)
-        .json({ message: "You must be the owner to edit this project." });
+      res.status(401).json({
+        message:
+          "Restricted Access: You must be the owner to edit this project.",
+      });
     }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-router.delete("/:id", validator, async (req, res) => {
-  const { id } = req.params;
-  try {
-    await Helper.remove(id);
-    const projects = await Helper.getAll();
-    res.status(201).json(projects);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+router.delete(
+  "/:id",
+  validator,
+  validateUserFundraiserRole,
+  async (req, res) => {
+    const { id } = req.params;
+    try {
+      const userId = req.userID;
+      const [project] = await Helper.getById(id);
+      if (project.owner_id === userId) {
+        await Helper.remove(id);
+        const projects = await Helper.getAll();
+        res.status(201).json(projects);
+      } else {
+        res.status(401).json({
+          message:
+            "Restricted Access: You must be the owner to edit this project.",
+        });
+      }
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
   }
-});
+);
 
 module.exports = router;
