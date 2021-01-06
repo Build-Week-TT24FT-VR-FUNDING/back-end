@@ -25,7 +25,7 @@ router.get("/:id", validator, async (req, res) => {
   }
 });
 
-router.post("/", validator, validateUserFundraiserRole, async (req, res) => {
+router.post("/", async (req, res) => {
   const id = req.userID;
   const project = { ...req.body, owner_id: id };
   try {
