@@ -14,11 +14,13 @@ const validatePayload = (req, res, next) => {
 
 const validateUsernameUnique = async (req, res, next) => {
   try {
-    const exsistingUser = Helper.findBy({ email: req.body.email });
+    const exsistingUser = await Helper.findBy(req.body.email);
     if (!exsistingUser.length) {
       next();
     } else {
-      res.status(400).json("username taken");
+      res
+        .status(400)
+        .json("Username is taken :(, please choose a unique username.");
     }
   } catch (error) {
     res.status(500).json(error.message);
