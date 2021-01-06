@@ -7,7 +7,7 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const user = await Helper.findByID(id);
-    if (user.length === 0) {
+    if (user.length <= 0) {
       res
         .status(204)
         .json({ message: "We were unable to locate the requested user." });
