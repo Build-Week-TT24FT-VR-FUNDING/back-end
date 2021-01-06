@@ -12,7 +12,11 @@ module.exports = {
   },
 
   async create(user) {
-    const { id } = await db("users").insert(user);
-    return db("users").where("id", id);
+    try {
+      const [id] = await db("users").insert(user);
+      return db("users").where("id", id);
+    } catch (error) {
+      throw new Error(error.message);
+    }
   },
 };
