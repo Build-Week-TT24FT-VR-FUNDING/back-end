@@ -7,10 +7,10 @@ router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const user = await Helper.findByID(id);
-    if (!user) {
+    if (user.length === 0) {
       res
         .status(204)
-        .json({ message: "We were unable to locate the user requested." });
+        .json({ message: "We were unable to locate the requested user." });
     } else {
       const userProjects = await ProjectHelper.getByOwnerId(id);
       res.status(200).json({
