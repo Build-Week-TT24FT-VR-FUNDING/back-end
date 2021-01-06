@@ -1,5 +1,10 @@
 const db = require("../../data/dbConfig");
 
+async function create(user) {
+  const [id] = await db("users").insert(user);
+  return db("users").where("id", id);
+}
+
 module.exports = {
   getAll() {
     return db("users");
@@ -11,12 +16,5 @@ module.exports = {
     return db("users").where("id", id);
   },
 
-  async create(user) {
-    try {
-      const [id] = await db("users").insert(user);
-      return db("users").where("id", id);
-    } catch (error) {
-      throw new Error(error.message);
-    }
-  },
+  create,
 };
