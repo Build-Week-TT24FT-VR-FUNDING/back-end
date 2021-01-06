@@ -344,7 +344,7 @@ Returns json data regarding all active projects.
 
 ---
 
-Returns json data regarding a single user.
+Returns json data regarding a list of projects from the requested user.
 
 - **URL**
 
@@ -361,7 +361,7 @@ Returns json data regarding a single user.
   - **Code:** 200 <br />
     **Content:**
 
-    `{ user information, projects: [project information]}`
+    `{ projects: [project information] }`
 
 - **Error Response:**
 
