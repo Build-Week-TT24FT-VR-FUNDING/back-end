@@ -9,13 +9,11 @@ router.get("/:id", async (req, res) => {
     const user = await Helper.findByID(id);
     if (user.length <= 0) {
       res
-        .status(204)
-        .json({ message: "We were unable to locate the requested user." });
+        .status(200)
+        .json({ message: "We were unable to locate the requested user. :(" });
     } else {
       const userProjects = await ProjectHelper.getByOwnerId(id);
       res.status(200).json({
-        email: user.email,
-        role: user.role,
         projects: userProjects,
       });
     }
