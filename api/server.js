@@ -4,13 +4,11 @@ const helmet = require("helmet");
 const Auth = require("./auth/auth-router");
 const projectRouter = require("./projects/project-router");
 const userRouter = require("./users/user-router");
-const morgan = require("morgan");
 
 const server = express();
 
 server.use(helmet());
 server.use(cors());
-server.use(morgan("common"));
 server.use(express.json());
 
 server.use("/account", Auth);
