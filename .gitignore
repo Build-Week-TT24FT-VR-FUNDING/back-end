@@ -122,4 +122,5 @@ dist
 .vscode
 
 # Test db
-user.db3
+test.db3
+.test
