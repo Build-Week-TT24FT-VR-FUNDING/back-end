@@ -34,6 +34,7 @@ router.post("/login", validatePayload, (req, res) => {
             message: "Welcome, " + user.email,
             token,
             role: user.role,
+            id: user.id,
           });
         } else {
           res.status(401).json("Invalid credentials, please try again.");
